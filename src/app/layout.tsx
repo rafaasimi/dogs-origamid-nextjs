@@ -1,9 +1,14 @@
-import type { Metadata } from "next";
-import "./globals.css";
+import type { Metadata } from 'next';
+import './globals.css';
+import Menu from '@/components/menu';
 
 export const metadata: Metadata = {
-  title: "Dogs - Next",
-  description: "Dogs: Uma rede social para cachorros criada no curso de NextJS da Origamid",
+  title: {
+    default: 'Dogs - Next',
+    template : '%s | Dogs - Next'
+  },
+  description:
+    'Dogs: Uma rede social para cachorros criada no curso de NextJS da Origamid',
 };
 
 export default function RootLayout({
@@ -13,7 +18,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        <Menu />
+        {children}
+      </body>
     </html>
   );
 }
