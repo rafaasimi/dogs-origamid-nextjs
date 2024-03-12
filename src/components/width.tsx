@@ -5,6 +5,8 @@ import React from 'react';
 export default function Width() {
   const [width, setWidth] = React.useState(0);
 
+  console.log(document.documentElement.clientWidth)
+
   React.useEffect(() => {
     const handleResize = () => {
       setWidth(document.documentElement.clientWidth);
