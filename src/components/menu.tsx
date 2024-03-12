@@ -9,6 +9,9 @@ export default function Menu() {
       <li>
         <Link href='/sobre#empresa' prefetch={true} scroll={false}>Sobre</Link>
       </li>
+      <li>
+        <Link href='/imc'>IMC</Link>
+      </li>
     </ul>
   )
 }
