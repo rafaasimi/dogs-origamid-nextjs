@@ -1,3 +1,4 @@
+import ClientFetch from "@/components/client-fetch";
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
 
@@ -12,8 +13,9 @@ export const metadata: Metadata = {
 export default function SobrePage() {
   return (
     <main>
-      <h2>Sobre</h2>
-      <Width />
+      <h1>Sobre</h1>
+      <ClientFetch />
+      {/* <Width /> */}
     </main>
   )
 }
