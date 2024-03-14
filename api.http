@@ -1,9 +1,24 @@
 GET http://localhost:3000/api/login
 
 ###
+
 POST http://localhost:3000/api/login?busca=camisa
 
 {
   "username": "dog",
   "password": "dog"
 }
+
+###
+
+# Exercicio
+POST http://localhost:3000/api/login
+
+{
+  "username": "dog",
+  "password": "dog"
+}
+
+###
+
+GET http://localhost:3000/api/perfil
