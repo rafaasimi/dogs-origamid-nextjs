@@ -27,8 +27,31 @@ export async function GET() {
 }
 
 export async function POST(request: NextRequest) {
+  // cookies
+  const cookies = request.cookies.get('token');
+
+  // headers
+  const headers = request.headers.get('Cache-Control');
+
+  // ip
+  const ip = request.headers.get('X-Forwarded-For');
+
+  // url
+  const url = request.url;
+
+  // search params
   const param = request.nextUrl.searchParams.get('busca');
+
+  // body
   const body = await request.json();
 
-  return Response.json({ method: 'POST', param: param, body: body });
+  return Response.json({
+    method: 'POST',
+    param: param,
+    body: body,
+    cookies: cookies,
+    headers: headers,
+    ip: ip,
+    url: url,
+  });
 }
