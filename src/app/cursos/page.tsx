@@ -1,4 +1,4 @@
-import { buscarCursos } from '@/api/cursos';
+import { buscarCursos } from '@/app/api/cursos';
 import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';

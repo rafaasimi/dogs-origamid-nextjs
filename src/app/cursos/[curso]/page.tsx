@@ -1,4 +1,4 @@
-import { buscarCurso } from '@/api/cursos';
+import { buscarCurso } from '@/app/api/cursos';
 import Link from 'next/link';
 
 type PageParams = {
