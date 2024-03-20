@@ -1,5 +1,6 @@
 'use client';
 
+import { login } from '@/actions/login';
 import React from 'react';
 
 export default function Login() {
@@ -7,18 +8,9 @@ export default function Login() {
   const [password, setPassword] = React.useState('');
 
   async function realizarLogin() {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    });
+    const response = await login(username, password);
 
-    if (response.ok) {
+    if (response) {
       window.location.href = '/';
     }
   }

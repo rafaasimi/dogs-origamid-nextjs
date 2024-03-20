@@ -1,7 +1,8 @@
 'use client';
 
-import { setCookie } from '@/actions/set-cookie';
+import { getCookie, setCookie } from '@/actions/cookies';
 import Acesso from '@/components/acesso';
+import Cookies from '@/components/cookies';
 import ServerFetch from '@/components/server-fetch';
 import Width from '@/components/width';
 import React from 'react';
@@ -22,6 +23,7 @@ export default function Home() {
       {/* <Acesso /> */}
       {/* <Width /> */}
       {/* <ServerFetch /> */}
+      <Cookies />
 
       <h2>Valor: {valor}</h2>
       <button onClick={handleClick}>Definir cookie</button>

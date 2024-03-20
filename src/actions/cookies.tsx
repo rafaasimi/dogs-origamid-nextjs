@@ -10,3 +10,7 @@ export async function setCookie(key: string, value: string) {
 
   return { funcionou: true, value };
 }
+
+export async function getCookie(key: string) {
+  return cookies().get(key);
+}
