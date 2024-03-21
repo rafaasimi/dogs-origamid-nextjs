@@ -1,27 +1,30 @@
-'use client';
-
+import { revalidatePathAction } from '@/actions/revalidate-path';
+import Atualizar from '@/components/atualizar';
 import React from 'react';
 
 type Acao = {
-  simbolo: string;
+  nome: string;
+  preco: number;
   atualizada: string;
-}
+};
 
-export default function AcoesPage() {
-  const [acao, setAcao] = React.useState<Acao | null>(null);
-  
-  React.useEffect(() => {
-	  fetch('https://api.origamid.online/acoes/lua')
-	  .then((response) => response.json())
-	  .then((json) => setAcao(json));
-  }, []);
-  
-  if(acao === null) return null;
+export default async function AcoesPage() {
+  const response = await fetch('https://api.origamid.online/acoes/lua', {
+    next: {
+      //  revalidate: 5,
+      tags: ['acoes'],
+    },
+  });
+
+  const acao = (await response.json()) as Acao;
 
   return (
     <main>
-      <h1>{acao.simbolo}</h1>
-      <h2>{acao.atualizada}</h2>
+      <h1>Ações</h1>
+      <Atualizar />
+      <h2>{acao.nome}</h2>
+      <p>{acao.preco}</p>
+      <p>{acao.atualizada}</p>
     </main>
   );
 }
