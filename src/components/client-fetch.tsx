@@ -24,8 +24,6 @@ export default function ClientFetch() {
     fetchData();
   }, []);
 
-  console.log(data);
-
   return (
     <div>
       <ul>

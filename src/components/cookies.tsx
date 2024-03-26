@@ -7,8 +7,6 @@ export default function Cookies() {
   async function buscarCookie() {
     const response = await getCookie('token');
 
-    console.log(response);
-
     if (!response?.value) {
       return;
     }

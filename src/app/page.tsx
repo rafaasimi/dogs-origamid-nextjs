@@ -11,10 +11,8 @@ export default function Home() {
   const [valor, setValor] = React.useState('');
 
   async function handleClick() {
-    console.log('teste');
     const response = await setCookie('segredo', '123456');
     setValor(response.value);
-    console.log(response);
   }
 
   return (

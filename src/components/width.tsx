@@ -5,8 +5,6 @@ import React from 'react';
 export default function Width() {
   const [width, setWidth] = React.useState(0);
 
-  console.log(document.documentElement.clientWidth)
-
   React.useEffect(() => {
     const handleResize = () => {
       setWidth(document.documentElement.clientWidth);
@@ -21,11 +19,12 @@ export default function Width() {
 
   const [ativo, setAtivo] = React.useState(false);
 
-
   return (
     <div>
-      <h2 style={{color: ativo ? '#680' : '#b00'}}>Largura da tela: {width}</h2>
-      <button onClick={() => setAtivo(b => !b)}>Alterar cor</button>
+      <h2 style={{ color: ativo ? '#680' : '#b00' }}>
+        Largura da tela: {width}
+      </h2>
+      <button onClick={() => setAtivo((b) => !b)}>Alterar cor</button>
     </div>
   );
 }

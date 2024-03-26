@@ -1,29 +1,28 @@
 'use client';
 
 import { adicionarProdutoAction } from '@/actions/produtos';
-import { Produto } from '@/app/produtos/page';
-import { useRouter } from 'next/navigation';
-import { FormEvent } from 'react';
+import { useFormStatus } from 'react-dom';
+
+function Button() {
+  const status = useFormStatus();
+
+  //  status.data
+  //  status.action
+  //  status.method
+  //  status.pending
+
+  return (
+    <button type="submit" disabled={status.pending}>
+      Cadastrar
+    </button>
+  );
+}
 
 export function AdicionarProduto() {
-  function adicionarProduto(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-
-    const produto: Produto = {
-      nome: e.currentTarget.nome.value,
-      preco: Number(e.currentTarget.preco.value),
-      descricao: e.currentTarget.descricao.value,
-      estoque: Number(e.currentTarget.estoque.value),
-      importado: e.currentTarget.importado.checked ? 1 : 0,
-    };
-
-    adicionarProdutoAction(produto);
-  }
-
   return (
     <div>
       <h1>Cadastrar novo produto:</h1>
-      <form onSubmit={adicionarProduto}>
+      <form action={adicionarProdutoAction}>
         <label htmlFor="nome">Nome:</label>
         <input type="text" name="nome" id="nome" />
 
@@ -43,7 +42,7 @@ export function AdicionarProduto() {
 
         <hr />
 
-        <button type="submit">Cadastrar</button>
+        <Button />
       </form>
     </div>
   );
