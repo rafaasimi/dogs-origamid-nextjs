@@ -1,16 +1,10 @@
 'use client';
 
 import { adicionarProdutoAction } from '@/actions/produtos';
-import { useFormStatus } from 'react-dom';
+import { useFormState, useFormStatus } from 'react-dom';
 
 function Button() {
   const status = useFormStatus();
-
-  //  status.data
-  //  status.action
-  //  status.method
-  //  status.pending
-
   return (
     <button type="submit" disabled={status.pending}>
       Cadastrar
@@ -19,10 +13,16 @@ function Button() {
 }
 
 export function AdicionarProduto() {
+  const [state, formAction] = useFormState(adicionarProdutoAction, {
+    errors: [],
+  });
+
+  console.log(state);
+
   return (
     <div>
       <h1>Cadastrar novo produto:</h1>
-      <form action={adicionarProdutoAction}>
+      <form action={formAction}>
         <label htmlFor="nome">Nome:</label>
         <input type="text" name="nome" id="nome" />
 
@@ -42,6 +42,11 @@ export function AdicionarProduto() {
 
         <hr />
 
+        {state.errors.map((error, i) => (
+          <p style={{ color: 'red' }} key={i}>
+            {error}
+          </p>
+        ))}
         <Button />
       </form>
     </div>
