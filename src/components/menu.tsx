@@ -2,24 +2,42 @@
 
 import { cookies } from 'next/headers';
 import Link from 'next/link';
-import { useParams, usePathname } from 'next/navigation';
-import React from 'react';
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from 'next/navigation';
+import React, { Suspense } from 'react';
 
 type Conta = {
   autorizado: boolean;
   usuario: string;
 };
 
+function Busca() {
+  const searchParams = useSearchParams();
+  const busca = searchParams.get('busca');
+  return <div>Busca: {busca}</div>;
+}
+
 export default function Menu() {
   const params = useParams();
   const pathName = usePathname();
+  const router = useRouter();
 
   console.log(params.acao);
   console.log(pathName);
 
   React.useEffect(() => {
-    console.log('Rota mudou')
-  }, [pathName])
+    // console.log('Rota mudou')
+    // setTimeout(() => {
+    //   router.push('/');
+    // }, 5000);
+    // setInterval(() => {
+    //   router.refresh();
+    // }, 5000)
+  }, [router]);
 
   let conta: Conta = {
     autorizado: false,
@@ -38,36 +56,41 @@ export default function Menu() {
   // }
 
   return (
-    <ul className="menu">
-      <li>
-        <Link href="/" prefetch={true}>
-          Home
-        </Link>
-      </li>
-      <li>
-        <Link href="/sobre#empresa" prefetch={true} scroll={false}>
-          Sobre
-        </Link>
-      </li>
-      <li>
-        <Link href="/imc">IMC</Link>
-      </li>
-      <li>
-        <Link href="/produtos">Produtos</Link>
-      </li>
-      <li>
-        <Link href="/cursos">Cursos</Link>
-      </li>
-      <li>
-        <Link href="/acoes">Ações</Link>
-      </li>
-      <li>
-        {conta.autorizado ? (
-          `Olá ${conta.usuario}`
-        ) : (
-          <Link href="/login">Login</Link>
-        )}
-      </li>
-    </ul>
+    <>
+      <Suspense>
+        <Busca />
+      </Suspense>
+      <ul className="menu">
+        <li>
+          <Link href="/" prefetch={true}>
+            Home
+          </Link>
+        </li>
+        <li>
+          <Link href="/sobre#empresa" prefetch={true} scroll={false}>
+            Sobre
+          </Link>
+        </li>
+        <li>
+          <Link href="/imc">IMC</Link>
+        </li>
+        <li>
+          <Link href="/produtos">Produtos</Link>
+        </li>
+        <li>
+          <Link href="/cursos">Cursos</Link>
+        </li>
+        <li>
+          <Link href="/acoes">Ações</Link>
+        </li>
+        <li>
+          {conta.autorizado ? (
+            `Olá ${conta.usuario}`
+          ) : (
+            <Link href="/login">Login</Link>
+          )}
+        </li>
+      </ul>
+    </>
   );
 }
