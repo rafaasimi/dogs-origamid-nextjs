@@ -1,5 +1,6 @@
 import ProdutosLista from '@/components/produtos-lista';
 import Link from 'next/link';
+import { Suspense } from 'react';
 
 export type Produto = {
   id?: string;
@@ -17,7 +18,9 @@ export default async function ProdutosPage() {
 
       <h1>Produtos</h1>
       <p>Essa aqui é a lista de produtos</p>
-      <ProdutosLista />
+      <Suspense fallback={'Carregando ...'}>
+        <ProdutosLista />
+      </Suspense>
     </main>
   );
 }
