@@ -1,28 +1,41 @@
+'use client';
+
 import { cookies } from 'next/headers';
 import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
+import React from 'react';
 
 type Conta = {
   autorizado: boolean;
   usuario: string;
 };
 
-export default async function Menu() {
+export default function Menu() {
+  const params = useParams();
+  const pathName = usePathname();
+
+  console.log(params.acao);
+  console.log(pathName);
+
+  React.useEffect(() => {
+    console.log('Rota mudou')
+  }, [pathName])
 
   let conta: Conta = {
     autorizado: false,
     usuario: '',
   };
 
-  const token = cookies().get('token')?.value;
-  const response = await fetch('https://api.origamid.online/conta/perfil', {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  // const token = cookies().get('token')?.value;
+  // const response = await fetch('https://api.origamid.online/conta/perfil', {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  // });
 
-  if (response.ok) {
-    conta = (await response.json()) as Conta;
-  }
+  // if (response.ok) {
+  //   conta = (await response.json()) as Conta;
+  // }
 
   return (
     <ul className="menu">
