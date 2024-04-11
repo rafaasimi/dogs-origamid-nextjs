@@ -1,6 +1,6 @@
-import { buscarCurso, buscarCursos } from '@/app/api/cursos';
-import { Metadata } from 'next';
+import { buscarCurso } from '@/app/api/cursos';
 import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 type PageParams = {
   params: {
@@ -19,6 +19,8 @@ export async function generateMetadata({ params }: PageParams) {
 
 export default async function CursoPage({ params }: PageParams) {
   const curso = await buscarCurso(params.curso);
+
+  if (curso.error) return notFound();
 
   return (
     <main>
