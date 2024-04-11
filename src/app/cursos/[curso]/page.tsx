@@ -8,25 +8,6 @@ type PageParams = {
   };
 };
 
-export async function generateStaticParams() {
-  const cursos = await buscarCursos();
-
-  return cursos.map((curso) => {
-    return { curso: curso.slug };
-  });
-}
-
-export async function generateMetadata({
-  params,
-}: PageParams): Promise<Metadata> {
-  const curso = await buscarCurso(params.curso);
-
-  return {
-    title: curso.nome,
-    description: curso.descricao,
-  };
-}
-
 export default async function CursoPage({ params }: PageParams) {
   const curso = await buscarCurso(params.curso);
 
