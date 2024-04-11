@@ -1,4 +1,5 @@
-import { buscarCurso } from '@/app/api/cursos';
+import { buscarCurso, buscarCursos } from '@/app/api/cursos';
+import { Metadata } from 'next';
 import Link from 'next/link';
 
 type PageParams = {
@@ -6,6 +7,25 @@ type PageParams = {
     curso: string;
   };
 };
+
+export async function generateStaticParams() {
+  const cursos = await buscarCursos();
+
+  return cursos.map((curso) => {
+    return { curso: curso.slug };
+  });
+}
+
+export async function generateMetadata({
+  params,
+}: PageParams): Promise<Metadata> {
+  const curso = await buscarCurso(params.curso);
+
+  return {
+    title: curso.nome,
+    description: curso.descricao,
+  };
+}
 
 export default async function CursoPage({ params }: PageParams) {
   const curso = await buscarCurso(params.curso);
@@ -19,7 +39,9 @@ export default async function CursoPage({ params }: PageParams) {
       <ul>
         {curso.aulas.map((aula) => (
           <li key={aula.id}>
-            <Link href={`/cursos/${params.curso}/${aula.slug}`}>{aula.nome}</Link>
+            <Link href={`/cursos/${params.curso}/${aula.slug}`}>
+              {aula.nome}
+            </Link>
           </li>
         ))}
       </ul>
