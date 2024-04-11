@@ -8,6 +8,15 @@ type PageParams = {
   };
 };
 
+export async function generateMetadata({ params }: PageParams) {
+  const curso = await buscarCurso(params.curso);
+
+  return {
+    title: curso.nome,
+    description: curso.descricao,
+  };
+}
+
 export default async function CursoPage({ params }: PageParams) {
   const curso = await buscarCurso(params.curso);
 
