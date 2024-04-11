@@ -1,4 +1,4 @@
-import { buscarCurso } from '@/app/api/cursos';
+import { buscarCurso, buscarCursos } from '@/app/api/cursos';
 import Link from 'next/link';
 
 type PageParams = {
@@ -6,6 +6,14 @@ type PageParams = {
     curso: string;
   };
 };
+
+export async function generateStaticParams() {
+  const cursos = await buscarCursos();
+
+  return cursos.map((curso) => {
+    return { curso: curso.slug };
+  });
+}
 
 export default async function CursoPage({ params }: PageParams) {
   const curso = await buscarCurso(params.curso);
@@ -19,7 +27,9 @@ export default async function CursoPage({ params }: PageParams) {
       <ul>
         {curso.aulas.map((aula) => (
           <li key={aula.id}>
-            <Link href={`/cursos/${params.curso}/${aula.slug}`}>{aula.nome}</Link>
+            <Link href={`/cursos/${params.curso}/${aula.slug}`}>
+              {aula.nome}
+            </Link>
           </li>
         ))}
       </ul>
