@@ -84,6 +84,9 @@ export default function Menu() {
           <Link href="/acoes">Ações</Link>
         </li>
         <li>
+          <Link href="/animais">Animais</Link>
+        </li>
+        <li>
           {conta.autorizado ? (
             `Olá ${conta.usuario}`
           ) : (
