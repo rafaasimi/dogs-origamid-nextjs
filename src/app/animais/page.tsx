@@ -25,6 +25,8 @@ export default async function AnimaisPage() {
               alt={animal.descricao}
               width={2400}
               height={1600}
+              quality={75}
+              sizes='100vw'
             />
           </li>
         ))}
