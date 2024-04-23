@@ -27,11 +27,11 @@ export default function Home() {
       <h2>Valor: {valor}</h2>
       <button onClick={handleClick}>Definir cookie</button>
 
-      <Script
+      {/* <Script
         id="script-teste"
         src="https://api.origamid.online/scripts/idade-legal.min.js"
         strategy='beforeInteractive'
-      />
+      /> */}
     </main>
   );
 }
