@@ -6,7 +6,10 @@ import Header from '@/components/Header/header';
 import Footer from '@/components/Footer/footer';
 
 export const metadata: Metadata = {
-  title: 'Dogs Next',
+  title: {
+    default: 'Dogs Next',
+    template: '%s | Dogs Next',
+  },
   description: 'Rede social para cachorros.',
 };
 
